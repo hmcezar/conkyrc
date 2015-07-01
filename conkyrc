@@ -59,6 +59,9 @@ color6 FFFFFF
 color7 FFFFFF
 color8 FFFFFF
 
+# Consider up only interfaces with address
+if_up_strictness address
+
 TEXT
 ${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=455876&u=c" -o ~/.cache/weather.xml}
 \
@@ -95,12 +98,12 @@ ${hr 2}
 \
 # Network
 \
-${if_existing /proc/net/route wlan0}
+${if_up wlan0}
 ${goto 40}${upspeedgraph wlan0 26,80 FFFFFF FFFFFF}${goto 150}${downspeedgraph wlan0 26,80 FFFFFF FFFFFF}
 ${goto 40}${color5}Up: ${color2}${upspeed wlan0}${color5}${goto 150}Down: ${color2}${downspeed wlan0}
 ${goto 40}${color5}Sent: ${color2}${totalup wlan0}${color5}${goto 150}Received: ${color2}${totaldown wlan0}
 ${endif}
-${if_existing /proc/net/route eth0}
+${if_up eth0}
 ${goto 40}${upspeedgraph eth0 26,80 FFFFFF FFFFFF}${goto 150}${downspeedgraph eth0 26,80 FFFFFF FFFFFF}
 ${goto 40}${color5}Up: ${color2}${upspeed eth0}${color5}${goto 150}Down: ${color2}${downspeed eth0}
 ${goto 40}${color5}Sent: ${color2}${totalup eth0}${color5}${goto 150}Received: ${color2}${totaldown eth0}
