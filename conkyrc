@@ -63,7 +63,7 @@ color8 FFFFFF
 if_up_strictness address
 
 TEXT
-${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=455876&u=c" -o ~/.cache/weather.xml}
+${execi 300 curl -s "http://weather.yahooapis.com/forecastrss?w=455827&u=c" -o ~/.cache/weather.xml}
 \
 # Weather
 \
